@@ -10,7 +10,6 @@ use Nette\Utils\Strings;
 
 class CrudPresenter extends Presenter
 {
-
 	public $lang = "cs_CZ";
 
     public $name = "";
@@ -142,7 +141,7 @@ class CrudPresenter extends Presenter
         $this->template->parent_id = $parent_id;
         $this->template->submodule = $submodule;
 
-        $this->addComponent($vp, 'vp')
+        $this->addComponent($vp, 'vp');
     }
 
     public function actionUpdate($id, $lang) {
