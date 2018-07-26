@@ -10,6 +10,6 @@
     "classmap": ["src"]
   },
   "requires": {
-    "contrastcms/visualpaginator": "^1.0"
+    "contrastcms/visualpaginator": "^1.1.1"
   }
 }
