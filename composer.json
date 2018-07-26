@@ -1,7 +1,7 @@
 {
   "name": "contrastcms/crud",
   "homepage": "https://github.com/spacek/contrastcms-crud",
-  "license": "MIT License",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/spacek/contrastcms-crud.git"
