@@ -5,9 +5,10 @@ namespace ContrastCms\Crud;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
+use Nette\Application\UI\Presenter;
 use Nette\Utils\Strings;
 
-class CrudPresenter
+class CrudPresenter extends Presenter
 {
 
     public $name = "";
