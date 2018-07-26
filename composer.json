@@ -12,6 +12,6 @@
   "require": {
     "nette/application": "^2.4",
     "nette/forms": "^2.4",
-    "contrastcms/visualpaginator": "^1.1.2"
+    "contrastcms/visualpaginator": ">=1.1.2"
   }
 }
