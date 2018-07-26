@@ -11,6 +11,8 @@ use Nette\Utils\Strings;
 class CrudPresenter extends Presenter
 {
 
+	public $lang = "cs_CZ";
+
     public $name = "";
     public $table = "";
     public $fields = [];
