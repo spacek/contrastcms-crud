@@ -95,7 +95,7 @@ class CrudPresenter extends Presenter
 
         // Pagination
 
-        $vp = new VisualPaginator($this, 'vp');
+        $vp = new VisualPaginator();
         $vp->loadState($this->request->getParameters());
         $paginator = $vp->getPaginator();
         $paginator->itemsPerPage = $filter->limit;
@@ -110,6 +110,8 @@ class CrudPresenter extends Presenter
             $this->template->results = $selection->order("id DESC")->limit($paginator->itemsPerPage, $paginator->offset);
         }
 
+        $this->addComponent($vp, 'vp');
+
     }
 
     public function actionSubmoduleView($submodule, $parent_id) {
@@ -122,7 +124,7 @@ class CrudPresenter extends Presenter
         $filter->limit = $this->defaultPagination;
         $this->template->limit = $filter->limit;
 
-        $vp = new VisualPaginator($this, 'vp');
+        $vp = new VisualPaginator();
         $vp->loadState($this->request->getParameters());
         $paginator = $vp->getPaginator();
         $paginator->itemsPerPage = $filter->limit;
@@ -139,6 +141,8 @@ class CrudPresenter extends Presenter
         $this->template->fields = $module["fields"];
         $this->template->parent_id = $parent_id;
         $this->template->submodule = $submodule;
+
+        $this->addComponent($vp, 'vp')
     }
 
     public function actionUpdate($id, $lang) {
