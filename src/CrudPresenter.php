@@ -2,6 +2,11 @@
 
 namespace ContrastCms\Crud;
 
+use ContrastCms\VisualPaginator\VisualPaginator;
+use Nette\Application\BadRequestException;
+use Nette\Application\UI\Form;
+use Nette\Utils\Strings;
+
 class CrudPresenter
 {
 
@@ -87,7 +92,7 @@ class CrudPresenter
 
         // Pagination
 
-        $vp = new \VisualPaginator($this, 'vp');
+        $vp = new VisualPaginator($this, 'vp');
         $vp->loadState($this->request->getParameters());
         $paginator = $vp->getPaginator();
         $paginator->itemsPerPage = $filter->limit;
@@ -114,7 +119,7 @@ class CrudPresenter
         $filter->limit = $this->defaultPagination;
         $this->template->limit = $filter->limit;
 
-        $vp = new \VisualPaginator($this, 'vp');
+        $vp = new VisualPaginator($this, 'vp');
         $vp->loadState($this->request->getParameters());
         $paginator = $vp->getPaginator();
         $paginator->itemsPerPage = $filter->limit;

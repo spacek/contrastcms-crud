@@ -9,7 +9,9 @@
   "autoload": {
     "classmap": ["src"]
   },
-  "requires": {
-    "contrastcms/visualpaginator": "^1.1.1"
+  "require": {
+    "nette/application": "^2.4",
+    "nette/forms": "^2.4",
+    "contrastcms/visualpaginator": "^1.1.2"
   }
 }
