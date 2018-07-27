@@ -2,10 +2,10 @@
     <div class="col-md-4">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="active" n:href="User:default" class="nav-link {ifCurrent default} active{/ifCurrent}">{$listAllHeading}</a>
+                <a class="active" n:href="default" class="nav-link {ifCurrent default} active{/ifCurrent}">{$listAllHeading}</a>
             </li>
             <li class="nav-item">
-                <a n:if="$user->getIdentity()->group_id <= 3" n:href="User:add" class="nav-link  {ifCurrent add} active{/ifCurrent}">{$createNewHeading}</a>
+                <a n:if="$user->getIdentity()->group_id <= 3" n:href="create" class="nav-link  {ifCurrent create} active{/ifCurrent}">{$createNewHeading}</a>
             </li>
         </ul>
     </div>
