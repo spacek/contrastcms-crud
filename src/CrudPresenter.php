@@ -93,7 +93,6 @@ class CrudPresenter extends Presenter
         }
 
         // Pagination
-
         $vp = new VisualPaginator();
         $vp->loadState($this->request->getParameters());
         $paginator = $vp->getPaginator();
@@ -110,6 +109,9 @@ class CrudPresenter extends Presenter
         }
 
         $this->addComponent($vp, 'vp');
+
+        // View
+		$this->template->setFile(__DIR__ . '/templates/default.latte');
 
     }
 
@@ -142,6 +144,9 @@ class CrudPresenter extends Presenter
         $this->template->submodule = $submodule;
 
         $this->addComponent($vp, 'vp');
+
+		// View
+		$this->template->setFile(__DIR__ . '/templates/default.latte');
     }
 
     public function actionUpdate($id, $lang) {
@@ -166,12 +171,16 @@ class CrudPresenter extends Presenter
 
         $this->template->parent_id = $parent_id;
 
-        $this->setView("create");
+		// View
+		$this->template->setFile(__DIR__ . '/templates/create.latte');
     }
 
     public function actionCreate($id, $lang) {
         $this["entryForm"]["crud_action_type"]->setValue("create");
         $this["entryForm"]["id"]->setValue($id);
+
+		// View
+		$this->template->setFile(__DIR__ . '/templates/create.latte');
     }
 
     public function getPrimaryNameField($id, $submodule = null) {
@@ -445,10 +454,9 @@ class CrudPresenter extends Presenter
 
     public function actionDelete($id) {
 
-        // todo check permission
         $submodule = $this->getParameter("submodule", null);
         $postRepository = $this->getDatabaseSelection($submodule);
-        $postRepository->where("id = ?", $id)->delete(); // todo: do recursive delete
+        $postRepository->where("id = ?", $id)->delete();
 
         $this->redirectUrl($_SERVER['HTTP_REFERER']);
         exit;
