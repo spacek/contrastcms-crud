@@ -20,7 +20,7 @@
                                         {continueIf $field["in_list"] != true}
                                         <th>{$field["label"]}</th>
                                     {/foreach}
-                                    <th colspan="{if $submodules}{count($submodules) + 1}{else}1{/if}">Akce</th>
+                                    <th n:if="$submodules" colspan="{count($submodules)}">Akce</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -44,14 +44,12 @@
                                             <a n:href="submoduleView 'submodule' => $module['table'], 'parent_id' => $result->id">{$module['name']}</a>
                                         </td>
                                     {/if}
-                                    <td><a class="dangerous-link"
-                                           data-warning="Opravdu si přejte smazat tuto položku?" n:href="delete $result->id"><i class="fa fa-delete"></i> Odebrat</a>
-                                    </td>
                                     <td>
                                         <div class="mrg-top-10 text-center">
-                                            <a  n:href="update $result->id" class="btn btn-icon btn-flat btn-rounded dropdown-toggle">
-                                                <i class="ti-more-alt"></i>
-                                            </a>
+                                            <a class="btn btn-icon btn-flat btn-rounded dropdown-toggle" n:href="delete $result->id"><i class="fa fa-trash"></i>
+                                                <a  n:href="update $result->id" class="btn btn-icon btn-flat btn-rounded dropdown-toggle">
+                                                    <i class="ti-more-alt"></i>
+                                                </a>
                                         </div>
                                     </td>
                                 </tr>
