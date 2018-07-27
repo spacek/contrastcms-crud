@@ -2,13 +2,13 @@
 
 namespace ContrastCms\Crud;
 
+use ContrastCms\Application\AdminModule\AdminBasePresenter;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
-use Nette\Application\UI\Presenter;
 use Nette\Utils\Strings;
 
-class CrudPresenter extends Presenter
+class CrudPresenter extends AdminBasePresenter
 {
 	public $lang = "cs_CZ";
 
