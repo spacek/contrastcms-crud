@@ -4,6 +4,7 @@ namespace ContrastCms\Crud;
 
 use ContrastCms\Application\AdminModule\AdminBasePresenter;
 use ContrastCms\VisualPaginator\VisualPaginator;
+use Czubehead\BootstrapForms\BootstrapForm;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Utils\Strings;
@@ -219,7 +220,7 @@ class CrudPresenter extends AdminBasePresenter
             $fields = $this->submodules[$submodule]["fields"];
         }
 
-        $form = new Form();
+        $form = new BootstrapForm();
         $form->addHidden("crud_action_type", "create");
         $form->addHidden("id", null);
         $form->addHidden("lang", $this->lang);
@@ -298,7 +299,7 @@ class CrudPresenter extends AdminBasePresenter
     protected function createComponentFilterForm()
     {
 
-        $form = new Form();
+        $form = new BootstrapForm();
         $form->setMethod("GET");
         $form->setAction($this->link("default"));
 
@@ -367,7 +368,7 @@ class CrudPresenter extends AdminBasePresenter
         return $items;
     }
 
-    public function processForm(Form $form)
+    public function processForm(BootstrapForm $form)
     {
         $values = $form->getValues();
         $submodule = null;
