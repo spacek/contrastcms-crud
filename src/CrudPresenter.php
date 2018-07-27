@@ -6,7 +6,6 @@ use ContrastCms\Application\AdminModule\AdminBasePresenter;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Czubehead\BootstrapForms\BootstrapForm;
 use Nette\Application\BadRequestException;
-use Nette\Application\UI\Form;
 use Nette\Utils\Strings;
 
 class CrudPresenter extends AdminBasePresenter
@@ -423,7 +422,7 @@ class CrudPresenter extends AdminBasePresenter
             if($result) {
                 $this->flashMessage('Položka byla úspěšně upravena.');
             } else {
-                $this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.');
+                $this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.', 'error');
             }
 
             $this->redirect("update", [
@@ -446,7 +445,7 @@ class CrudPresenter extends AdminBasePresenter
                     "submodule" => $submodule
                 ]);
             } else {
-                $this->flashMessage('Položku se nepodařilo přidat.');
+                $this->flashMessage('Položku se nepodařilo přidat.', 'error');
                 $this->redirect("default");
             }
 
