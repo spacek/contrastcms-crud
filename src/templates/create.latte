@@ -1,20 +1,20 @@
 {block #content}
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="card-heading border bottom">
-					<h4 class="card-title">Nový záznam</h4>
-				</div>
-				<div class="card-block">
-					<div class="mrg-top-40">
-						<div class="row">
-							<div class="col-md-8 ml-auto mr-auto">
-								{control entryForm}
-							</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-heading border bottom">
+				<h4 class="card-title">{ifCurrent update}Upravit{else}Nový záznam{/ifCurrent}</h4>
+			</div>
+			<div class="card-block">
+				<div class="mrg-top-40">
+					<div class="row">
+						<div class="col-md-8 ml-auto mr-auto">
+							{control entryForm}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 {/block}
