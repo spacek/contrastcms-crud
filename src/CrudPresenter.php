@@ -5,6 +5,7 @@ namespace ContrastCms\Crud;
 use ContrastCms\Application\AdminModule\AdminBasePresenter;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Czubehead\BootstrapForms\BootstrapForm;
+use Czubehead\BootstrapForms\Enums\RenderMode;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Strings;
 
@@ -299,6 +300,7 @@ class CrudPresenter extends AdminBasePresenter
     {
 
         $form = new BootstrapForm();
+        $form->renderMode = RenderMode::Inline;
         $form->setMethod("GET");
         $form->setAction($this->link("default"));
 
