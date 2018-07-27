@@ -1,50 +1,70 @@
 {block #content}
-<div class="detail">
-    <h2>{$listAllHeading}</h2>
-    {include "_top.latte"}
-
-    <hr />
-    {if $results && count($results)}
-        {if $sortable}
-        <table id="tablednd" data-id="0" class="list" data-url="{plink reorderItems}">
-        {else}
-        <table class="list border" cellspacing="0">
-            {/if}
-            <thead>
-            <tr>
-                {if $displayId}
-                    <th>ID</th>
-                {/if}
-                {foreach $fields as $name => $field}
-                    {continueIf $field["in_list"] != true}
-                    <th>{$field["label"]}</th>
-                {/foreach}
-                <th colspan="{count($submodules) + 2}">Akce</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="divider"></tr>
-            <tr n:foreach="$results as $result" id="{$result->id}" class="{if $iterator->odd}odd{else}even{/if}">
-                {if $displayId}
-                    <td class="first">{$result->id}</td>
-                {/if}
-                {foreach $fields as $name => $field}
-                    {continueIf $field["in_list"] != true}
-                    <td>{if $field["type"] != "select"}{$result->{$name}}{else}{$presenter->getSelectFieldValue($result->{$name}, $field)}{/if}</td>
-                {/foreach}
-                <td><a n:href="update $result->id">Upravit</a></td>
-                {if $submodules && count($submodules) > 0 && !$submodule}
-                    <td n:foreach="$submodules as $module"><a n:href="submoduleView 'submodule' => $module['table'], 'parent_id' => $result->id">{$module['name']}</a></td>
-                {/if}
-                <td><a class="dangerous-link" data-warning="Opravdu si přejte smazat tuto položku?" n:href="delete $result->id">Odebrat</a></td>
-            </tr>
-            </tbody>
-        </table>
-
-        {control vp}
-        {else}
-        <p>Neexistuje žádná položka</p>
-    {/if}
-
+{include "_top.latte"}
+<div class="page-title">
+    <h4>{$listAllHeading}</h4>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-block">
+                <div class="table-overflow">
+                    {if $results && count($results)}
+                    <table id="dt-opt" class="table table-lg table-hover">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            {if $displayId}
+                            <th>ID</th>
+                            {/if}
+                            {foreach $fields as $name => $field}
+                                {continueIf $field["in_list"] != true}
+                                <th>{$field["label"]}</th>
+                            {/foreach}
+                            <th colspan="{count($submodules) + 2}">Akce</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr n:foreach="$results as $result" id="{$result->id}">
+                            <td>
+                                <div class="checkbox mrg-left-20">
+                                    <input id="task10" name="task10" type="checkbox">
+                                    <label for="task10"></label>
+                                </div>
+                            </td>
+                            {if $displayId}
+                                <td class="first">{$result->id}</td>
+                            {/if}
+                            {foreach $fields as $name => $field}
+                                {continueIf $field["in_list"] != true}
+                                <td>{if $field["type"] != "select"}{$result->{$name}}{else}{$presenter->getSelectFieldValue($result->{$name}, $field)}{/if}</td>
+                            {/foreach}
+                            <td><a n:href="update $result->id">Upravit</a></td>
+                            {if $submodules && count($submodules) > 0 && !$submodule}
+                                <td n:foreach="$submodules as $module">
+                                    <a n:href="submoduleView 'submodule' => $module['table'], 'parent_id' => $result->id">{$module['name']}</a>
+                                </td>
+                            {/if}
+                            <td><a class="dangerous-link"
+                                   data-warning="Opravdu si přejte smazat tuto položku?" n:href="delete $result->id">Odebrat</a>
+                            </td>
+                            <td>
+                                <div class="mrg-top-10 text-center">
+                                    <button class="btn btn-icon btn-flat btn-rounded dropdown-toggle">
+                                        <i class="ti-more-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {control vp}
+                    {else}
+                        <p>Neexistuje žádná položka</p>
+                    {/if}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {/block}
