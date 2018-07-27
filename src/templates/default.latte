@@ -3,20 +3,22 @@
         <h4>{$listAllHeading}</h4>
     </div>
     <div class="row">
-        <div class="card">
-            <div class="card-block">
-                <div class="col-md-12">
-                    {include "_top.latte"}
-                </div>
-                <div n:if="$presenter->isLinkCurrent('default') && $filterEnabled == true" class="col-md-12">
-                    <div class="card">
-                        <div class="card-title">
-                            Filtrace
-                        </div>
-                        <div class="card-block">
-                            <div class="filter cf" style="clear: both; margin: 30px 0 10px 0; padding: 6px 0;">
-                                <h3>Filtrace:</h3>
-                                {control filterForm}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-12">
+                        {include "_top.latte"}
+                    </div>
+                    <div n:if="$presenter->isLinkCurrent('default') && $filterEnabled == true" class="col-md-12">
+                        <div class="card">
+                            <div class="card-title">
+                                Filtrace
+                            </div>
+                            <div class="card-block">
+                                <div class="filter cf" style="clear: both; margin: 30px 0 10px 0; padding: 6px 0;">
+                                    <h3>Filtrace:</h3>
+                                    {control filterForm}
+                                </div>
                             </div>
                         </div>
                     </div>
