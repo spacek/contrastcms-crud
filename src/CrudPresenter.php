@@ -428,8 +428,7 @@ class CrudPresenter extends AdminBasePresenter
 				$this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.', 'error');
 			}
 
-			$this->redirect("update", [
-				"id" => $id,
+			$this->redirect("default", [
 				"submodule" => $submodule
 			]);
 
