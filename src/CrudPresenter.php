@@ -314,7 +314,7 @@ class CrudPresenter extends AdminBasePresenter
 			switch($field["type"]) {
 				case "text":
 				case "integer":
-					$item =  $form->addText($name, $field["label"]);
+					$item =  $form->addText($name, $field["label"] . ": ");
 
 					if(isset($field["default_value_date_today"]) && $field["default_value_date_today"]) {
 						$item->setDefaultValue(date("Y-m-d H:00:00"));
@@ -336,7 +336,7 @@ class CrudPresenter extends AdminBasePresenter
 						$items += $this->{$field["items_provider_value"]}();
 					}
 
-					$form->addSelect($name, $field["label"], $items);
+					$form->addSelect($name, $field["label"] . ": ", $items);
 					break;
 			}
 		}
