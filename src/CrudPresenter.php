@@ -244,7 +244,7 @@ class CrudPresenter extends AdminBasePresenter
 					break;
 
 				case "datetime":
-					$item =  $form->addText($name, $field["label"])->setRequired($field["required"]);
+					$item =  $form->addDateTime($name, $field["label"])->setRequired($field["required"]);
 					$item->setDefaultValue(date("Y-m-d H:00:00"));
 					break;
 
