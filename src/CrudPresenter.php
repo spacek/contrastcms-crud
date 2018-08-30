@@ -3,13 +3,14 @@
 namespace ContrastCms\Crud;
 
 use ContrastCms\Application\AdminModule\AdminBasePresenter;
+use ContrastCms\Application\AdminModule\SecuredPresenter;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Czubehead\BootstrapForms\BootstrapForm;
 use Czubehead\BootstrapForms\Enums\RenderMode;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Strings;
 
-class CrudPresenter extends AdminBasePresenter
+class CrudPresenter extends SecuredPresenter
 {
 	public $lang = "cs_CZ";
 
