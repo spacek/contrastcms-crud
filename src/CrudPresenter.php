@@ -246,7 +246,7 @@ class CrudPresenter extends SecuredPresenter
 
 				case "datetime":
 					$item =  $form->addDateTime($name, $field["label"])->setRequired($field["required"]);
-					$item->setDefaultValue(date("d.m.Y H:00:00"));
+					$item->setDefaultValue(date("j.n.Y H:00"));
 					break;
 
 				case "integer":
