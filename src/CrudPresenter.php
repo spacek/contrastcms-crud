@@ -259,7 +259,16 @@ class CrudPresenter extends SecuredPresenter
 					break;
 
 				case "upload":
-					$form->addUpload($name, $field["label"])->setRequired($field["required"]);
+
+					$type = $field["upload_type"] ?? "file";
+
+					if($type !== "image") {
+						$form->addUpload($name, $field["label"])->setRequired($field["required"]);
+					} else {
+						$form->addUpload($name, $field["label"])->setRequired($field["required"])->addCondition($form::FILLED)->addRule($form::IMAGE, "Please choose image");
+					}
+
+
 					break;
 
 				case "select":
