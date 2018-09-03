@@ -433,6 +433,7 @@ class CrudPresenter extends SecuredPresenter
 			$result = $this->getDatabaseSelection($submodule)->where("id = ?", $id)->fetch()->update((array)$values);
 
 			if($result) {
+				$this->fireEvent("updated", $result, $values);
 				$this->flashMessage('Položka byla úspěšně upravena.');
 			} else {
 				$this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.', 'error');
@@ -452,6 +453,9 @@ class CrudPresenter extends SecuredPresenter
 
 			if($result) {
 				$this->flashMessage('Položka byla úspěšně přidána.');
+
+				$this->fireEvent("created", $result, $values);
+
 				$this->redirect("update", [
 					"id" => $result,
 					"submodule" => $submodule
@@ -495,5 +499,9 @@ class CrudPresenter extends SecuredPresenter
 		}
 
 		echo 1; die;
+	}
+
+	protected function fireEvent($eventType, $resultState, $values) {
+		return false;
 	}
 }
