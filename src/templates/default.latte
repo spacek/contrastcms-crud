@@ -57,7 +57,7 @@
                                     {/if}
                                     {foreach $fields as $name => $field}
                                         {continueIf $field["in_list"] != true}
-                                        <td>{if $field["type"] != "select" && $field["type"] != "list_only"}{$result->{$name}}{elseif $field["type"] == "list_only"}{$presenter->{$field["value_provider"]}($result)|noescape}{else}{$presenter->getSelectFieldValue($result->{$name}, $field)}{/if}</td>
+                                        <td>{if $field["type"] != "select" && $field["type"] != "list_only"}{$result->{$name}}{elseif $field["type"] == "list_only"}{$presenter->{$field["value_provider"]}($result)|noescape}{elseif $field["type"] == "file"}{$presenter->getThumbnailOrLink($result->file_id)|noescape}{else}{$presenter->getSelectFieldValue($result->{$name}, $field)}{/if}</td>
                                     {/foreach}
                                     {if $submodules && count($submodules) > 0 && !$submodule}
                                         <td n:foreach="$submodules as $module">

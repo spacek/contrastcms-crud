@@ -4,6 +4,7 @@ namespace ContrastCms\Crud;
 
 use ContrastCms\Application\AdminModule\AdminBasePresenter;
 use ContrastCms\Application\AdminModule\SecuredPresenter;
+use ContrastCms\Application\FileRepository;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Czubehead\BootstrapForms\BootstrapForm;
 use Czubehead\BootstrapForms\Enums\RenderMode;
@@ -503,5 +504,23 @@ class CrudPresenter extends SecuredPresenter
 
 	protected function fireEvent($eventType, $resultState, $values) {
 		return false;
+	}
+
+	public function getThumbnailOrLink($fileId) {
+		try {
+			/** @var FileRepository $fileRepository */
+			$fileRepository = $this->context->getService("fileRepository");
+			$fileType = $fileRepository->getFileType($fileId);
+			if($fileType === "image") {
+				return $fileRepository->getFilenameResized($fileId, 100);
+			} else {
+				$path = "/data/" . $fileRepository->getFilename($fileId);
+				return '<a target="_blank" href="'. $path .'">Open file</a>';
+			}
+		} catch (\Exception $e) {
+			error_log($e->getMessage());
+		}
+
+		return "";
 	}
 }
