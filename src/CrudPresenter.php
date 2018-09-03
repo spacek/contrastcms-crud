@@ -512,7 +512,7 @@ class CrudPresenter extends SecuredPresenter
 			$fileRepository = $this->context->getService("fileRepository");
 			$fileType = $fileRepository->getFileType($fileId);
 			if($fileType === "image") {
-				return $fileRepository->getFilenameResized($fileId, 100);
+				return '<img src="'. $fileRepository->getFilenameResized($fileId, 100) .'" />';
 			} else {
 				$path = "/data/" . $fileRepository->getFilename($fileId);
 				return '<a target="_blank" href="'. $path .'">Open file</a>';
