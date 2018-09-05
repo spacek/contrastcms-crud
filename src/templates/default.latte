@@ -1,86 +1,88 @@
 {block #content}
-    <div class="page-title">
-        <h4>{$moduleName}: {$listAllHeading}</h4>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <div class="col-md-12">
-                        {include "_top.latte"}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div n:if="$presenter->isLinkCurrent('default') && $filterEnabled == true" class="col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <div class="card-title">
-                        <h3>Filtrace</h3>
-                    </div>
-                    <div class="filter cf" style="">
-                        {control filterForm}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <div class="table-overflow">
-                        {if $results && count($results)}
-                            <table id="dt-opt" class="table table-lg table-hover">
-                                <thead>
-                                <tr>
-                                    {*<th></th>*}
-                                    {if $displayId}
-                                        <th>ID</th>
-                                    {/if}
-                                    {foreach $fields as $name => $field}
-                                        {continueIf $field["in_list"] != true}
-                                        <th>{$field["label"]}</th>
-                                    {/foreach}
-                                    <th n:if="$submodules" colspan="{count($submodules)}">Akce</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr n:foreach="$results as $result" id="{$result->id}">
-                                    {*<td>
-                                        <div class="checkbox mrg-left-20">
-                                            <input id="task10" name="task10" type="checkbox">
-                                            <label for="task10"></label>
-                                        </div>
-                                    </td>*}
-                                    {if $displayId}
-                                        <td class="first">{$result->id}</td>
-                                    {/if}
-                                    {foreach $fields as $name => $field}
-                                        {continueIf $field["in_list"] != true}
-                                        <td>{if $field["type"] != "select" && $field["type"] != "list_only" && $field["type"] != "upload"}{$result->{$name}}{elseif $field["type"] == "list_only"}{$presenter->{$field["value_provider"]}($result)|noescape}{elseif $field["type"] == "upload"}{$presenter->getThumbnailOrLink($result->file_id)|noescape}{else}{$presenter->getSelectFieldValue($result->{$name}, $field)}{/if}</td>
-                                    {/foreach}
-                                    {if $submodules && count($submodules) > 0 && !$submodule}
-                                        <td n:foreach="$submodules as $module">
-                                            <a n:href="submoduleView 'submodule' => $module['table'], 'parent_id' => $result->id">{$module['name']}</a>
-                                        </td>
-                                    {/if}
-                                    <td>
-                                        <div class="mrg-top-10 text-center">
-                                            <a class="btn btn-icon btn-flat btn-rounded dropdown-toggle" n:href="delete $result->id"><i class="fa fa-trash"></i>
-                                                <a  n:href="update $result->id" class="btn btn-icon btn-flat btn-rounded dropdown-toggle">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        {else}
-                            <p>Neexistuje žádná položka</p>
-                        {/if}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="page-title">
+		<h4>{$moduleName}: {$listAllHeading}</h4>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-block">
+					<div class="col-md-12">
+						{include "_top.latte"}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div n:if="$presenter->isLinkCurrent('default') && $filterEnabled == true" class="col-md-12">
+			<div class="card">
+				<div class="card-block">
+					<div class="card-title">
+						<h3>Filtrace</h3>
+					</div>
+					<div class="filter cf" style="">
+						{control filterForm}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-block">
+					<div class="table-overflow">
+						{if $results && count($results)}
+							<table id="dt-opt" class="table table-lg table-hover">
+								<thead>
+								<tr>
+									{*<th></th>*}
+									{if $displayId}
+										<th>ID</th>
+									{/if}
+									{foreach $fields as $name => $field}
+										{continueIf $field["in_list"] != true}
+										<th>{$field["label"]}</th>
+									{/foreach}
+									<th n:if="$submodules" colspan="{count($submodules)}">Akce</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr n:foreach="$results as $result" id="{$result->id}">
+									{*<td>
+										<div class="checkbox mrg-left-20">
+											<input id="task10" name="task10" type="checkbox">
+											<label for="task10"></label>
+										</div>
+									</td>*}
+									{if $displayId}
+										<td class="first">{$result->id}</td>
+									{/if}
+									{foreach $fields as $name => $field}
+										{continueIf $field["in_list"] != true}
+										<td>{if $field["type"] != "select" && $field["type"] != "list_only" && $field["type"] != "upload"}{$result->{$name}}{elseif $field["type"] == "list_only"}{$presenter->{$field["value_provider"]}($result)|noescape}{elseif $field["type"] == "upload"}{$presenter->getThumbnailOrLink($result->file_id)|noescape}{else}{$presenter->getSelectFieldValue($result->{$name}, $field)}{/if}</td>
+									{/foreach}
+									{if $submodules && count($submodules) > 0 && !$submodule}
+										<td n:foreach="$submodules as $module">
+											<a n:href="submoduleView 'submodule' => $module['table'], 'parent_id' => $result->id">{$module['name']}</a>
+										</td>
+									{/if}
+									<td>
+										<div class="mrg-top-10 text-center">
+											<a n:if="$enableDeletes === true" class="btn btn-icon btn-flat btn-rounded dropdown-toggle" n:href="delete $result->id"><i
+														class="fa fa-trash"></i></a>
+												<a n:href="update $result->id"
+														class="btn btn-icon btn-flat btn-rounded dropdown-toggle">
+													<i class="ti-more-alt"></i>
+												</a>
+										</div>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						{else}
+							<p>Neexistuje žádná položka</p>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {/block}

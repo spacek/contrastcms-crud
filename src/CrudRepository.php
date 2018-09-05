@@ -20,8 +20,4 @@ class CrudRepository
 	{
 		$this->connection = $db;
 	}
-
-	public function getInsertId() {
-		return $this->getInsertId();
-	}
 }

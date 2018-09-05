@@ -9,6 +9,7 @@ use ContrastCms\VisualPaginator\VisualPaginator;
 use Czubehead\BootstrapForms\BootstrapForm;
 use Czubehead\BootstrapForms\Enums\RenderMode;
 use Nette\Application\BadRequestException;
+use Nette\Application\UI\Form;
 use Nette\Utils\Strings;
 
 class CrudPresenter extends SecuredPresenter
@@ -23,6 +24,7 @@ class CrudPresenter extends SecuredPresenter
 	public $submodules = false;
 	public $enableExport = false;
 	public $showTotals = false;
+	public $enableDeletes = true;
 
 	public $defaultPagination = 30;
 
@@ -47,6 +49,7 @@ class CrudPresenter extends SecuredPresenter
 		$this->template->sortable = $this->sortable;
 		$this->template->displayId = $this->displayId;
 		$this->template->submodules = $this->submodules;
+		$this->template->enableDeletes = $this->enableDeletes;
 		$this->template->submodule = $submodule = $this->getParameter("submodule", null);
 		$this->template->moduleName = $this->moduleName ?? $this->name;
 		if($submodule) {
@@ -353,7 +356,7 @@ class CrudPresenter extends SecuredPresenter
 		}
 
 		$form->addSubmit("store", "Odeslat");
-
+		$form->onValidate[] = [$this, 'validateForm'];
 		return $form;
 	}
 
@@ -471,9 +474,12 @@ class CrudPresenter extends SecuredPresenter
 
 	public function actionDelete($id) {
 
-		$submodule = $this->getParameter("submodule", null);
-		$postRepository = $this->getDatabaseSelection($submodule);
-		$postRepository->where("id = ?", $id)->delete();
+		if($this->enableDeletes) {
+			$submodule = $this->getParameter("submodule", null);
+			$postRepository = $this->getDatabaseSelection($submodule);
+			$postRepository->where("id = ?", $id)->delete();
+			$this->flashMessage("Item has been deleted");
+		}
 
 		$this->redirectUrl($_SERVER['HTTP_REFERER']);
 		exit;
@@ -504,6 +510,10 @@ class CrudPresenter extends SecuredPresenter
 
 	protected function fireEvent($eventType, $resultState, $values) {
 		return false;
+	}
+
+	public function validateForm(Form $form) {
+		return true;
 	}
 
 	public function getThumbnailOrLink($fileId) {
