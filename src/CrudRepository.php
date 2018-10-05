@@ -12,6 +12,10 @@ class CrudRepository
 		return $this->connection->table($name);
 	}
 
+	public function query($sql) {
+		return $this->connection->query($sql);
+	}
+
 	public function getTable($name) {
 		return $this->table($name);
 	}
