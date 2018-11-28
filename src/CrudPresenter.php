@@ -303,7 +303,7 @@ class CrudPresenter extends SecuredPresenter
 			}
 		}
 
-		$form->addSubmit("store", "Odeslat");
+		$form->addSubmit("store", "Submit");
 
 		$form->onValidate[] = [$this, 'validateForm'];
 		$form->onSuccess[] = [$this, "processForm"];

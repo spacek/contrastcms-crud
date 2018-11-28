@@ -40,7 +40,7 @@
 										{continueIf $field["in_list"] != true}
 										<th>{$field["label"]}</th>
 									{/foreach}
-									<th n:if="$submodules" colspan="{count($submodules)}">Akce</th>
+									<th n:if="$submodules" colspan="{count($submodules)}">Action</th>
 									<th></th>
 								</tr>
 								</thead>
@@ -78,7 +78,7 @@
 								</tbody>
 							</table>
 						{else}
-							<p>Neexistuje žádná položka</p>
+							<p>Nothing found..</p>
 						{/if}
 					</div>
 				</div>
