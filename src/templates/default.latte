@@ -66,7 +66,7 @@
 									{/if}
 									<td>
 										<div class="mrg-top-10 text-center">
-											<a n:if="$enableDeletes === true" class="btn btn-icon btn-flat btn-rounded dropdown-toggle" n:href="delete $result->id"><i
+											<a n:if="$enableDeletes === true" onclick="return confirm('Do you really want to delete this item?');" class="btn btn-icon btn-flat btn-rounded dropdown-toggle" n:href="delete $result->id"><i
 														class="fa fa-trash"></i></a>
 												<a n:href="update $result->id"
 														class="btn btn-icon btn-flat btn-rounded dropdown-toggle">
