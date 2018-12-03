@@ -287,7 +287,7 @@ class CrudPresenter extends SecuredPresenter
 					$items = [];
 
 					if (!$field["required"]) {
-						$items[0] = "- nevybráno -";
+						$items[0] = "- Choose -";
 					}
 
 					if ($field["items_provider"] === "array") {
@@ -348,7 +348,7 @@ class CrudPresenter extends SecuredPresenter
 
 					$items = [];
 
-					$items[0] = "- nevybráno -";
+					$items[0] = "- Choose -";
 
 					if ($field["items_provider"] == "array") {
 						$items += $field["items_provider_value"];
