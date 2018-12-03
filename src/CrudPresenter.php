@@ -283,11 +283,11 @@ class CrudPresenter extends SecuredPresenter
 						$items[0] = "- nevybráno -";
 					}
 
-					if($field["items_provider"] == "array") {
+					if($field["items_provider"] === "array") {
 						$items += $field["items_provider_value"];
-					} elseif($field["items_provider"] == "table") {
+					} elseif($field["items_provider"] === "table") {
 						$items += $this->getTableSelectableValues($field["items_provider_value"]);
-					} elseif($field["items_provider"] == "function") {
+					} elseif($field["items_provider"] === "function") {
 						$items += $this->{$field["items_provider_value"]}();
 					}
 
@@ -405,10 +405,10 @@ class CrudPresenter extends SecuredPresenter
 		}
 
 		foreach($fields as $key => $field) {
-			if($field["type"] == "upload") {
+			if($field["type"] === "upload") {
 				if($values->{$key}->isOk()) {
 
-					$fileType = ($field["upload_type"] == "image") ? "image" : "file";
+					$fileType = ($field["upload_type"] === "image") ? "image" : "file";
 					$file_id = $this->context->getService("fileRepository")->storeFile($values->{$key}, $fileType);
 
 					if($file_id) {
@@ -426,7 +426,7 @@ class CrudPresenter extends SecuredPresenter
 			}
 		}
 
-		if($values->crud_action_type == "update") {
+		if($values->crud_action_type === "update") {
 
 			// Unset redudant fields
 			$id = $values->id;
@@ -460,9 +460,9 @@ class CrudPresenter extends SecuredPresenter
 
 				$this->fireEvent("created", $result, $values);
 
-				$this->redirect("update", [
-					"id" => $result,
-					"submodule" => $submodule
+				$this->redirect("default", [
+					"submodule" => $submodule,
+					"parent_id" => $parent_id
 				]);
 			} else {
 				$this->flashMessage('Položku se nepodařilo přidat.', 'error');
