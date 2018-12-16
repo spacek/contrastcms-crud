@@ -510,25 +510,27 @@ class CrudPresenter extends SecuredPresenter
         } else {
             foreach ($fields as $key => $field) {
                 if ($field["type"] === "upload") {
-                    if ($values->{$key}->isOk()) {
+                    if (count($values->{$key})) {
 
                         foreach ($values->{$key} as $fileUpload) {
 
-                            $values2 = $values;
+                            if($fileUpload->isOk()) {
+                                $values2 = $values;
 
-                            $fileType = ($field["upload_type"] === "image") ? "image" : "file";
-                            $file_id = $this->context->getService("fileRepository")->storeFile($fileUpload, $fileType);
+                                $fileType = ($field["upload_type"] === "image") ? "image" : "file";
+                                $file_id = $this->context->getService("fileRepository")->storeFile($fileUpload, $fileType);
 
-                            if ($file_id) {
-                                $values2->{$key} = $file_id;
+                                if ($file_id) {
+                                    $values2->{$key} = $file_id;
+                                }
+
+                                // Unset redudant fields
+                                unset($values->id);
+                                unset($values->crud_action_type);
+
+                                // Do query
+                                $result = $this->getDatabaseSelection($submodule)->insert((array)$values);
                             }
-
-                            // Unset redudant fields
-                            unset($values->id);
-                            unset($values->crud_action_type);
-
-                            // Do query
-                            $result = $this->getDatabaseSelection($submodule)->insert((array)$values);
                         }
 
                     } else {
