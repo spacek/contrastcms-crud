@@ -436,10 +436,10 @@ class CrudPresenter extends SecuredPresenter
                 if ($field["type"] === "upload") {
 
                     if(is_array($values->{$key})) {
-                        $values->{$key} = $values->{$key}[0];
+                        $values->{$key} = $values->{$key}[0] ?? false;
                     }
 
-                    if ($values->{$key}->isOk()) {
+                    if ($values->{$key} && $values->{$key}->isOk()) {
 
                         $fileType = ($field["upload_type"] === "image") ? "image" : "file";
                         $file_id = $this->context->getService("fileRepository")->storeFile($values->{$key}, $fileType);
