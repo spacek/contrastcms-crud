@@ -434,6 +434,11 @@ class CrudPresenter extends SecuredPresenter
         if (!$isBatchOperation || $values->crud_action_type === "update") {
             foreach ($fields as $key => $field) {
                 if ($field["type"] === "upload") {
+
+                    if(is_array($values->{$key})) {
+                        $values->{$key} = $values->{$key}[0];
+                    }
+
                     if ($values->{$key}->isOk()) {
 
                         $fileType = ($field["upload_type"] === "image") ? "image" : "file";
