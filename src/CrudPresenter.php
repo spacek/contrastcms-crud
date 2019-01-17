@@ -263,8 +263,8 @@ class CrudPresenter extends SecuredPresenter
                 case "integer":
                     $item = $form->addInteger($name, $field["label"])->setRequired($field["required"]);
 
-                    if (isset($field["default_value_date_today"]) && $field["default_value_date_today"]) {
-                        $item->setDefaultValue(date("Y-m-d H:00:00"));
+                    if (isset($field["default_value_date_today"])) {
+                        $item->setDefaultValue($field["default_value_date_today"]);
                     }
 
                     break;
