@@ -586,8 +586,8 @@ class CrudPresenter extends SecuredPresenter
 				unset($rows[$key]);
 			}
 
-			$rowRecord = $this->getDatabaseSelection()->where("order = ?", $row['oldData'])->fetch();
-			$rowRecord->update(["order" => $row['newData']]);
+			$rowRecord = $this->getDatabaseSelection()->where("order = ?", $row->oldData)->fetch();
+			$rowRecord->update(["order" => $row->newData);
 		}
 
 		echo 1;
