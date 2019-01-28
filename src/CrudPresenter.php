@@ -579,7 +579,8 @@ class CrudPresenter extends SecuredPresenter
     public function actionReorderItems()
     {
 
-        $rows = explode(";", $_POST["rows"]);
+        $rows = json_decode($_POST["rows"]);
+        var_dump($rows); die;
 
         foreach ($rows as $key => $row) {
             if (!$row) {
