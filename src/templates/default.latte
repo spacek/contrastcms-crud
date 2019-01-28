@@ -29,7 +29,7 @@
 				<div class="card-block">
 					<div class="table-overflow">
 						{if $results && count($results)}
-							<table id="dt-opt" class="table table-lg table-hover">
+							<table id="dt-opt" class="table table-lg table-hover{if $sortable} js-reorder{/if}">
 								<thead>
 								<tr>
 									{*<th></th>*}
