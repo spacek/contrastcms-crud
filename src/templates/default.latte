@@ -34,7 +34,7 @@
 								<tr>
 									{*<th></th>*}
 									{if $displayId}
-										<th>ID</th>
+										<th>ID / order</th>
 									{/if}
 									{foreach $fields as $name => $field}
 										{continueIf $field["in_list"] != true}
@@ -53,7 +53,7 @@
 										</div>
 									</td>*}
 									{if $displayId}
-										<td class="first">{$result->id}</td>
+										<td class="first"{if $sortable} style="cursor: move;" {/if}>{if $sortable}{$result->order}{else}{$result->id}{/if}</td>
 									{/if}
 									{foreach $fields as $name => $field}
 										{continueIf $field["in_list"] != true}
