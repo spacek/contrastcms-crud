@@ -580,6 +580,7 @@ class CrudPresenter extends SecuredPresenter
 	{
 
 		$rows = json_decode($_POST["rows"]);
+		$map = [];
 
 		foreach ($rows as $key => $row) {
 			if (!$row) {
@@ -587,7 +588,12 @@ class CrudPresenter extends SecuredPresenter
 			}
 
 			$rowRecord = $this->getDatabaseSelection()->where("order = ?", $row->oldData)->fetch();
-			$rowRecord->update(["order" => $row->newData]);
+			$map[$rowRecord->id] = $row->newData;
+		}
+
+		foreach($map as $id => $newOrder) {
+			$rowRecord = $this->getDatabaseSelection()->where("id = ?", $id)->fetch();
+			$rowRecord->update(["order" => $newOrder]);
 		}
 
 		echo 1;
