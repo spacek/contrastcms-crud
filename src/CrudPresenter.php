@@ -211,7 +211,7 @@ class CrudPresenter extends SecuredPresenter
 		}
 
 		foreach ($fields as $key => $item) {
-			if ($item["primary_name"] == 1) {
+			if (isset($item["primary_name"]) && $item["primary_name"] == 1) {
 				return $key;
 			}
 		}
