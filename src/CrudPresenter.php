@@ -493,6 +493,12 @@ class CrudPresenter extends SecuredPresenter
 				// Do query
 				$result = $this->getDatabaseSelection($submodule)->insert((array)$values);
 
+				if($this->sortable) {
+					$result->update([
+						'order' => $result->id
+					]);
+				}
+
 				if ($result) {
 					$this->flashMessage('Položka byla úspěšně přidána.');
 
