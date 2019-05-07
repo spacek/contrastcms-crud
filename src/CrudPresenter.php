@@ -494,8 +494,12 @@ class CrudPresenter extends SecuredPresenter
 				$result = $this->getDatabaseSelection($submodule)->insert((array)$values);
 
 				if($this->sortable) {
+
+					$maxOrder = $this->getDatabaseSelection($submodule)->order('order DESC')->fetch();
+					$newOrder = $maxOrder['order'] + 1;
+
 					$result->update([
-						'order' => $result->id
+						'order' => $newOrder
 					]);
 				}
 
