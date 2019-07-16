@@ -589,6 +589,8 @@ class CrudPresenter extends SecuredPresenter
 	public function actionReorderItems()
 	{
 
+		$submodule = $this->getParameter("submodule", null);
+
 		$rows = json_decode($_POST["rows"]);
 		$map = [];
 
@@ -597,12 +599,12 @@ class CrudPresenter extends SecuredPresenter
 				unset($rows[$key]);
 			}
 
-			$rowRecord = $this->getDatabaseSelection()->where("order = ?", $row->oldData)->fetch();
+			$rowRecord = $this->getDatabaseSelection($submodule)->where("order = ?", $row->oldData)->fetch();
 			$map[$rowRecord->id] = $row->newData;
 		}
 
 		foreach($map as $id => $newOrder) {
-			$rowRecord = $this->getDatabaseSelection()->where("id = ?", $id)->fetch();
+			$rowRecord = $this->getDatabaseSelection($submodule)->where("id = ?", $id)->fetch();
 			$rowRecord->update(["order" => $newOrder]);
 		}
 
