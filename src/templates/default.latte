@@ -41,9 +41,7 @@
 										<th>{$field["label"]}</th>
 									{/foreach}
 									<th n:if="!$submodule && $submodules" colspan="{count($submodules)}">Action</th>
-									{if !$submodule && count($submodules) > 0}
 									<th></th>
-									{/if}
 								</tr>
 								</thead>
 								<tbody>
