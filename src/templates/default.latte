@@ -40,8 +40,8 @@
 										{continueIf $field["in_list"] != true}
 										<th>{$field["label"]}</th>
 									{/foreach}
-									<th n:if="$submodules" colspan="{count($submodules)}">Action</th>
-									{if count($submodules)}
+									<th n:if="!$submodule && $submodules" colspan="{count($submodules)}">Action</th>
+									{if !$submodule && count($submodules) > 0}
 									<th></th>
 									{/if}
 								</tr>
