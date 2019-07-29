@@ -43,7 +43,7 @@ class CrudPresenter extends SecuredPresenter
 		parent::startup();
 
 		$this->template->listAllHeading = $this->template->defaultListAllHeading = $this->listAllHeading;
-		$this->template->listAllHeadingHeading = $this->template->defaultListAllHeading;
+		$this->template->listAllHeadingSimple = $this->template->defaultListAllHeading;
 		$this->template->createNewHeading = $this->createNewHeading;
 		$this->template->fields = $this->fields;
 		$this->template->customActions = $this->customActions;
