@@ -43,6 +43,7 @@ class CrudPresenter extends SecuredPresenter
 		parent::startup();
 
 		$this->template->listAllHeading = $this->template->defaultListAllHeading = $this->listAllHeading;
+		$this->template->listAllHeadingHeading = $this->template->defaultListAllHeading;
 		$this->template->createNewHeading = $this->createNewHeading;
 		$this->template->fields = $this->fields;
 		$this->template->customActions = $this->customActions;
@@ -54,6 +55,7 @@ class CrudPresenter extends SecuredPresenter
 		$this->template->moduleName = $this->moduleName ?? $this->name;
 		if ($submodule) {
 			$this->template->listAllHeading = $this->submodules[$submodule]["listAllHeading"] . ' ' . $this->getParentItemName();
+			$this->template->listAllHeadingSimple = $this->submodules[$submodule]["listAllHeading"];
 		}
 	}
 
@@ -106,9 +108,9 @@ class CrudPresenter extends SecuredPresenter
 		foreach ($filterableFields as $fieldName => $field) {
 			$paramValue = $this->getParameter($fieldName, "");
 			if ($paramValue) {
-				if ($field["type"] == "text" || $field["type"] == "integer") {
+				if ($field["type"] === "text" || $field["type"] === "integer") {
 					$selection->where("$fieldName IS LIKE ?", "%" . $this->getParameter($fieldName, "") . "%");
-				} elseif ($field["type"] == "select") {
+				} elseif ($field["type"] === "select") {
 					$selection->where("$fieldName = ?", $this->getParameter($fieldName, ""));
 				}
 			}
@@ -162,7 +164,7 @@ class CrudPresenter extends SecuredPresenter
 			$this->template->results = $this->getDatabaseSelection($submodule)->where("parent_id = ?", $parent_id)->limit($paginator->itemsPerPage, $paginator->offset);
 		}
 
-		$this->template->listAllHeading = $module["listAllHeading"];
+		//$this->template->listAllHeading = $module["listAllHeading"];
 		$this->template->createNewHeading = $module["createNewHeading"];
 		$this->template->fields = $module["fields"];
 		$this->template->parent_id = $parent_id;
