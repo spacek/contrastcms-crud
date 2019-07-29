@@ -63,12 +63,16 @@ class CrudPresenter extends SecuredPresenter
 		$parent_id = $this->getParameter("parent_id", null);
 		$parentRow = $this->getDatabaseSelection()->where("id = ?", $parent_id)->fetch();
 
-		$link = $this->link('update', $parent_id);
+		$link = $this->link('update', [
+			'id' => $parent_id,
+			'parent_id' => null,
+			'submodule' => null
+		]);
 
 		if(isset($parentRow->name)) {
 			return ': ' . '<a href="'. $link .'">' . $parentRow->name . "</a>";
 		} else if(isset($parentRow->title)) {
-			return ':' . '<a href="'. $link .'">' . $parentRow->title . "</a>";
+			return ': ' . '<a href="'. $link .'">' . $parentRow->title . "</a>";
 		}
 
 		return '';
