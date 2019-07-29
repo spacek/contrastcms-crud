@@ -111,6 +111,8 @@ class CrudPresenter extends SecuredPresenter
 		$this->template->filterEnabled = $filterEnabled;
 		$this->template->filterableFields = $filterableFields;
 
+		$this['filterForm']->setDefaults($_GET);
+
 		if ($this->sortable) {
 			$this->template->results = $selection->order("order DESC, id ASC")->limit($paginator->itemsPerPage, $paginator->offset);
 		} else {
