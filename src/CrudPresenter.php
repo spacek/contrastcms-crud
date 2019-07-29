@@ -54,7 +54,7 @@ class CrudPresenter extends SecuredPresenter
 		$this->template->submodule = $submodule = $this->getParameter("submodule", null);
 		$this->template->moduleName = $this->moduleName ?? $this->name;
 		if ($submodule) {
-			$this->template->listAllHeading = $this->submodules[$submodule]["listAllHeading"] . ' ' . $this->getParentItemName();
+			$this->template->listAllHeading = $this->submodules[$submodule]["listAllHeading"] . $this->getParentItemName();
 			$this->template->listAllHeadingSimple = $this->submodules[$submodule]["listAllHeading"];
 		}
 	}
@@ -63,10 +63,12 @@ class CrudPresenter extends SecuredPresenter
 		$parent_id = $this->getParameter("parent_id", null);
 		$parentRow = $this->getDatabaseSelection()->where("id = ?", $parent_id)->fetch();
 
+		$link = $this->link('edit', $parent_id);
+
 		if(isset($parentRow->name)) {
-			return ': ' . $parentRow->name;
+			return ': ' . '<a href="'. $link .'">' . $parentRow->name . "</a>";
 		} else if(isset($parentRow->title)) {
-			return ': ' . $parentRow->title;
+			return ':' . '<a href="'. $link .'">' . $parentRow->title . "</a>";
 		}
 
 		return '';
