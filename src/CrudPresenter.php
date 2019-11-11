@@ -333,7 +333,7 @@ class CrudPresenter extends SecuredPresenter
 
 					$item = $form->addSelect($name, $field["label"], $items);
 
-					if($field['select2']) {
+					if(isset($field['select2']) && $field['select2']) {
 						$item->getControlPrototype()->addAttributes(array("class" => "select2"));
 					}
 
