@@ -331,7 +331,12 @@ class CrudPresenter extends SecuredPresenter
 						$items += $this->{$field["items_provider_value"]}();
 					}
 
-					$form->addSelect($name, $field["label"], $items);
+					$item = $form->addSelect($name, $field["label"], $items);
+
+					if($field['select2']) {
+						$item->getControlPrototype()->addAttributes(array("class" => "select2"));
+					}
+
 					break;
 
 				case "textarea":
