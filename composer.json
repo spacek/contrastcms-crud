@@ -11,16 +11,8 @@
   },
   "repositories": [
     {
-      "type":"package",
-      "package": {
-        "name": "spacek/bootstrap-4-forms",
-        "version":"master",
-        "source": {
-          "url": "https://github.com/spacek/bootstrap-4-forms.git",
-          "type": "git",
-          "reference":"master"
-        }
-      }
+      "type": "vcs",
+      "url": "https://github.com/spacek/bootstrap-4-forms"
     }
   ],
   "require": {
@@ -29,6 +21,6 @@
     "nette/database": "^3.1",
     "contrastcms/application": "^2.0",
     "contrastcms/visualpaginator": ">=2.0",
-    "spacek/bootstrap-4-forms": "master@dev"
+    "spacek/bootstrap-4-forms": "master"
   }
 }
