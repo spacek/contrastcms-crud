@@ -29,6 +29,6 @@
     "nette/database": "^3.1",
     "contrastcms/application": "^2.0",
     "contrastcms/visualpaginator": ">=2.0",
-    "spacek/bootstrap-4-forms": "master"
+    "spacek/bootstrap-4-forms": "master@dev"
   }
 }
